@@ -1,0 +1,21 @@
+name: Validate Grad Project Studio
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile scripts
+        run: python -m compileall -q scripts
+      - name: Validate sample project
+        run: |
+          python scripts/generate_plantuml.py examples/sample-project.json --output /tmp/grad-project-uml
+          python scripts/generate_delivery_plan.py examples/sample-project.json --output /tmp/grad-project-delivery
+          python scripts/validate_project.py examples/sample-project.json

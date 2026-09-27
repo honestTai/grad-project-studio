@@ -1,0 +1,20 @@
+{
+  "name": "grad-project-studio",
+  "version": "0.1.0",
+  "description": "从毕业设计题目到代码、论文、PlantUML 图、截图证据和答辩 PPT 的可追溯工作流插件。",
+  "author": {
+    "name": "HRouter.net community",
+    "url": "https://HRouter.net"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Grad Project Studio",
+    "shortDescription": "自动规划、实现、验证并交付计算机类毕业设计。",
+    "longDescription": "Grad Project Studio 根据题目、技术栈和学校模板建立项目事实模型，协助完成需求澄清、系统开发、PlantUML 图、浏览器截图、毕业设计报告和答辩 PPT，并对代码与材料的一致性进行检查。",
+    "developerName": "HRouter.net community",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "使用 Grad Project Studio 创建一个计算机类毕业设计项目，从需求澄清开始。"
+  },
+  "mcpServers": "./.mcp.json"
+}

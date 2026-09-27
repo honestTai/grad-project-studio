@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Grad Project Studio project manifest",
+  "type": "object",
+  "required": ["schema_version", "project", "stack", "roles", "features", "deliverables"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "project": {
+      "type": "object",
+      "required": ["title", "profile"],
+      "properties": {
+        "title": {"type": "string", "minLength": 3},
+        "profile": {"enum": ["crud", "mini_program", "analytics", "recommendation", "microservice", "custom"]},
+        "school_template": {"type": ["string", "null"]}
+      }
+    },
+    "stack": {"type": "object", "additionalProperties": {"type": "string"}},
+    "roles": {"type": "array", "items": {"type": "string"}},
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "actor", "status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "name": {"type": "string"},
+          "actor": {"type": "string"},
+          "description": {"type": "string"},
+          "preconditions": {"type": "array", "items": {"type": "string"}},
+          "main_flow": {"type": "array", "items": {"type": "string"}},
+          "exceptions": {"type": "array", "items": {"type": "string"}},
+          "entities": {"type": "array", "items": {"type": "string"}},
+          "api": {"type": "string"},
+          "tests": {"type": "array", "items": {"type": "string"}},
+          "status": {"enum": ["planned", "implemented", "verified", "blocked"]},
+          "evidence": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "entities": {"type": "array", "items": {"type": "object"}},
+    "deliverables": {"type": "object"}
+  }
+}

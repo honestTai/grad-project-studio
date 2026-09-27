@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1",
+  "project": {"title": "基于 Spring Boot 与 uni-app 的校园互助系统", "profile": "mini_program", "school_template": null},
+  "stack": {"backend": "Spring Boot", "frontend": "uni-app", "database": "MySQL"},
+  "roles": ["学生用户", "管理员"],
+  "features": [
+    {"id": "auth-login", "name": "登录", "actor": "学生用户", "main_flow": ["提交账号密码", "校验用户状态", "返回登录结果"], "entities": ["user"], "api": "POST /api/auth/login", "tests": ["正确登录", "错误密码"], "status": "planned", "evidence": []},
+    {"id": "post-create", "name": "内容发布", "actor": "学生用户", "main_flow": ["填写内容", "检查敏感词", "保存发布记录"], "entities": ["user", "post"], "api": "POST /api/posts", "tests": ["发布文字", "敏感词拦截"], "status": "planned", "evidence": []}
+  ],
+  "entities": [
+    {"name": "user", "label": "用户", "fields": [{"name": "id", "type": "BIGINT", "key": "PK"}, {"name": "username", "type": "VARCHAR(64)", "key": ""}]},
+    {"name": "post", "label": "内容", "fields": [{"name": "id", "type": "BIGINT", "key": "PK"}, {"name": "user_id", "type": "BIGINT", "key": "FK"}, {"name": "content", "type": "TEXT", "key": ""}]}
+  ],
+  "deliverables": {"report": {"status": "planned", "template": null}, "ppt": {"status": "planned", "slides": 12}, "screenshots": [], "uml": []}
+}

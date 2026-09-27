@@ -1,3 +1,3 @@
 # Grad Project Studio
 
-Read `../skills/grad-project-studio/SKILL.md` before working on a computer-science graduation project. Preserve the shared `.grad-project/project.json` facts and run the validation script before delivery.
+Read `../skills/grad-project-studio/SKILL.md` before working on a computer-science system design project. Preserve the shared `.grad-project/project.json` facts and run the validation script before delivery.

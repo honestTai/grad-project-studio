@@ -1,60 +1,81 @@
+<div align="center">
+
+**English** · [简体中文](README.zh-CN.md)
+
+[HRouter](https://hrouter.net/home) · [All public projects](https://github.com/honestTai) · [Star & Fork trends](#project-activity)
+
+</div>
+
+[![Repository summary](https://raw.githubusercontent.com/honestTai/honestTai/main/assets/badges/grad-project-studio.svg)](#project-activity)
+
 # Grad Project Studio
 
-Grad Project Studio 是一个面向计算机类系统设计项目的开源 Codex 工作流插件。它把题目、技术栈、用户模板和真实项目证据组织成一个项目事实模型，再围绕这个模型协助完成代码、PlantUML 图、系统设计报告和答辩 PPT。
+**Keep the code, diagrams, evidence, report, and presentation in sync.**
 
-> **HRouter.net 赞助项目**  
-> 本工作流由 [HRouter.net](https://HRouter.net) 赞助，面向需要稳定 AI 开发与文档工作流的开发者开放源码。
+An open-source Codex workflow plugin for computer-science system-design projects. It organizes the topic, technology stack, user-provided templates, and real project evidence into a shared project fact model, then assists with implementation, PlantUML diagrams, reports, and defense presentations.
 
-## 它解决什么问题
+> Sponsored by [HRouter.net](https://hrouter.net). Open-source workflows for developers who need consistent AI-assisted implementation and documentation.
 
-很多系统设计材料的问题不是缺少文字，而是代码、数据库、截图、论文和 PPT 彼此对不上。Grad Project Studio 把每个功能作为一条可追溯链管理：
+## What it solves
+
+The hard part is not producing more text: it is making the code, database, screenshots, report, and slides agree. Each feature is tracked through an evidence chain:
 
 ```text
-需求 → 功能设计 → 数据库 → PlantUML → 代码 → 测试 → 浏览器截图 → 论文 → PPT
+Requirements → Feature design → Database → PlantUML → Code → Tests → Screenshots → Report → Slides
 ```
 
-第一版包含：
+- Multi-round requirement clarification, even when the starting point is only a title or technology stack.
+- Workflow templates for management systems, Mini Programs, data analysis, recommendation systems, and microservices.
+- A `project.json` fact model covering roles, features, entities, flows, technologies, and deliverables.
+- Repeatable generation of PlantUML sequence, ER, and architecture diagrams.
+- Repository scanning for page, API, database, test, and comment evidence.
+- Report and presentation outlines, with the user's own templates taking priority.
+- Quality gates for implementation, tests, diagrams, screenshots, and report mappings.
+- Agent adaptation notes for Codex, Claude Code, Cursor, OpenCode, and Gemini CLI.
 
-- 多轮需求澄清提示词，支持用户只提供题目、提纲或技术栈。
-- 普通管理系统、小程序、数据分析、推荐系统和微服务项目的模板化路由。
-- `project.json` 项目事实模型，保存角色、功能、实体、流程、技术栈和交付物。
-- PlantUML 时序图、ER 图和架构图的可重复生成脚本。
-- 代码仓库扫描，收集页面、接口、数据库、测试和注释证据。
-- 报告和答辩 PPT 的内容骨架，支持用户自有模板作为优先输入。
-- 质量门禁，检查功能是否有实现、测试、图、截图和论文映射。
-- Codex、Claude Code、Cursor、OpenCode、Gemini CLI 等 Agent 的适配说明。
+## Writing and AI-text detection
 
-## 关于 AIGC 文本检测
+Writing should be grounded in real project facts: concrete APIs, fields, exception handling, test results, and screenshots, with generation and revision records retained. Avoid generic filler and repetitive phrasing.
 
-插件支持基于真实项目事实的自然化写作：减少空泛套话，改变机械重复的句式，加入项目中的接口、字段、异常处理、测试结果和截图证据，并保留生成过程和修改记录。
+Detection tools, thresholds, and false positives vary. This plugin does **not** guarantee a detection result or promise to bypass detection. Review and adapt all deliverables under the rules of the institution or organization receiving them.
 
-不同平台使用的检测工具、阈值和误报情况都不稳定，插件不承诺任何工具的固定检测结果，也不把绕过检测作为产品保证。推荐用户结合使用方规定审阅和修改最终材料。
-
-## 快速开始
+## Quick start
 
 ```powershell
 cd plugins/grad-project-studio
-python scripts/new_project.py --title "基于SpringBoot与uni-app的校园互助系统" --stack springboot,uni-app,mysql
+python scripts/new_project.py --title "Campus mutual-aid system with Spring Boot and uni-app" --stack springboot,uni-app,mysql
 python scripts/generate_plantuml.py .grad-project/project.json
 python scripts/validate_project.py .grad-project/project.json
 ```
 
-生成的 `.grad-project/` 目录包含项目事实模型、PlantUML 源文件、证据索引和交付物清单。Codex 使用本插件时，先加载 `skills/grad-project-studio/SKILL.md`，再根据用户输入进入需求澄清、实现或交付阶段。
+The generated `.grad-project/` directory contains the fact model, PlantUML sources, evidence index, and deliverable inventory. In Codex, load `skills/grad-project-studio/SKILL.md` inside the plugin before entering clarification, implementation, or delivery.
 
-## 推荐工作流
+## Recommended workflow
 
-1. 输入题目、技术栈、已有提纲或现有代码。
-2. Agent 询问角色、功能、后台、数据、权限和用户自有模板；信息不足时给出适合系统设计项目的建议。
-3. 用户确认功能清单和自有模板。
-4. Agent 实现项目，补充注释、单元测试、接口测试和运行说明。
-5. 使用 Kimi WebBridge 进行真实页面操作并采集截图证据。
-6. 生成 PlantUML 图、报告内容和答辩 PPT 内容。
-7. 运行一致性检查，确认代码、截图、报告和 PPT 使用相同的项目事实。
+1. Provide a topic, stack, outline, or existing code.
+2. Clarify roles, features, administration, data, permissions, and user templates.
+3. Confirm the feature list and templates before implementation.
+4. Implement the project with comments, unit/API tests, and run instructions.
+5. Capture evidence from actual browser interactions using Kimi WebBridge.
+6. Generate diagrams, report content, and presentation content.
+7. Validate that code, screenshots, report, and slides use the same facts.
 
-## 开源协议
+## License and support
 
-本项目使用 MIT License，见 [LICENSE](LICENSE)。欢迎提交用户模板、功能模板、测试适配器和其他 Agent 的入口文件。
+[MIT License](LICENSE). Contributions of templates, test adapters, and agent entry points are welcome.
 
-## 赞助与支持
+Sponsored by [HRouter.net](https://hrouter.net), which provides model access and workflow support for developers.
 
-本项目由 [HRouter.net](https://HRouter.net) 赞助。HRouter.net 提供面向开发者的 AI 中转服务和工作流支持。
+---
+
+<a id="project-activity"></a>
+
+## Project activity
+
+Star / Fork totals and retained-event history, scheduled to refresh daily.
+
+[![Star and Fork history for grad-project-studio](https://raw.githubusercontent.com/honestTai/honestTai/main/assets/metrics/grad-project-studio.svg)](https://github.com/honestTai/honestTai/blob/main/data/README.md)
+
+[Observed daily totals](https://raw.githubusercontent.com/honestTai/honestTai/main/assets/metrics/grad-project-studio-daily.svg) · [Methodology](https://github.com/honestTai/honestTai/blob/main/data/METHODOLOGY.md) · [All public projects](https://github.com/honestTai)
+
+<sub>Historical curves reconstruct currently retained stars and visible forks, not historical net totals. Separate daily observations start on 2026-10-06; no fabricated backfill.</sub>
